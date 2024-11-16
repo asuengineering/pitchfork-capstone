@@ -1,0 +1,50 @@
+{
+	"name": "acf/hero-capstone",
+	"title": "Capstone: Hero",
+	"description": "A hero block using inner blocks for a contained layout. Replaces the post title in the template.",
+	"category": "pitchfork-capstone",
+	"icon": "star-filled",
+	"keywords": [
+		"hero",
+		"title",
+		"capstone"
+	],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "hero-capstone.php"
+	},
+	"supports": {
+		"spacing": {
+			"margin": [
+				"bottom"
+			],
+			"padding": false
+		},
+		"classname": false,
+		"align": [
+			"full"
+		],
+		"multiple": false,
+		"color": {
+			"background": false,
+			"text": false,
+			"link": false
+		}
+	},
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "full"
+		},
+		"style": {
+			"type": "object",
+			"default": {
+				"spacing": {
+					"margin": {
+						"bottom": "var:preset|spacing|uds-size-8"
+					}
+				}
+			}
+		}
+	}
+}

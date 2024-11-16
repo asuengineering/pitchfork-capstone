@@ -1,0 +1,33 @@
+{
+	"name": "acf/research-theme",
+	"title": "Research Theme",
+	"description": "Displays contents from the research theme taxonomy",
+	"category": "pitchfork-capstone",
+	"icon": "star-filled",
+	"keywords": [
+		"theme",
+		"research",
+		"icon"
+	],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "research-theme.php"
+	},
+	"supports": {
+		"anchor": true,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			],
+			"padding": false
+		},
+		"classname": true,
+		"align": false,
+		"color": {
+			"background": false,
+			"text": false,
+			"link": false
+		}
+	}
+}

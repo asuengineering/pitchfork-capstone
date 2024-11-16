@@ -1,7 +1,7 @@
 <?php
 /**
  * Additional functions for Advanced Custom Fields.
- * 
+ *
  * Contents:
  *   - Load path for ACF groups from the parent.
  *   - Register custom blocks for the theme.
@@ -35,7 +35,17 @@ add_filter( 'acf/settings/save_json', 'pitchfork_child_theme_field_groups' );
 /**
  * Register additional custom blocks for the theme.
  */
-function pitchfork_child_theme_acf_init_block_types() {
-	// The sky is the limit.
+function pitchfork_capstone_theme_acf_init_block_types() {
+	// Array of block folders to use. Each contains a block.json file.
+	$block_includes = array(
+		'/hero-capstone',               // Capstone Hero
+		'/research-theme',              // Research Theme Block
+		'/project-sponsor',             // Sponsor
+	);
+
+	// Loop through array items and register each block.
+	foreach ( $block_includes as $folder ) {
+		register_block_type( get_stylesheet_directory() . '/acf-block-templates' . $folder );
+	}
 }
-add_action( 'acf/init', 'pitchfork_child_theme_acf_init_block_types' );
+add_action( 'acf/init', 'pitchfork_capstone_theme_acf_init_block_types' );

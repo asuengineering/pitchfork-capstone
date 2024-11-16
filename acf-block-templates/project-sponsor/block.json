@@ -1,0 +1,32 @@
+{
+	"name": "acf/project-sponsor",
+	"title": "Project Sponsor",
+	"description": "Displays contents from the project sponsor taxonomy",
+	"category": "pitchfork-capstone",
+	"icon": "star-filled",
+	"keywords": [
+		"sponsor",
+		"project"
+	],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "project-sponsor.php"
+	},
+	"supports": {
+		"anchor": true,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			],
+			"padding": false
+		},
+		"classname": true,
+		"align": false,
+		"color": {
+			"background": false,
+			"text": false,
+			"link": false
+		}
+	}
+}
