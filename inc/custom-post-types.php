@@ -12,20 +12,20 @@
 
  function pitchfork_capstone_project_cpt() {
     $labels = array(
-        'name'               => _x('Projects', 'Post type general name', 'textdomain'),
-        'singular_name'      => _x('Project', 'Post type singular name', 'textdomain'),
-        'menu_name'          => _x('Projects', 'Admin Menu text', 'textdomain'),
-        'name_admin_bar'     => _x('Project', 'Add New on Toolbar', 'textdomain'),
+        'name'               => _x('Capstones', 'Post type general name', 'textdomain'),
+        'singular_name'      => _x('Capstone', 'Post type singular name', 'textdomain'),
+        'menu_name'          => _x('Capstones', 'Admin Menu text', 'textdomain'),
+        'name_admin_bar'     => _x('Capstone', 'Add New on Toolbar', 'textdomain'),
         'add_new'            => __('Add New', 'textdomain'),
-        'add_new_item'       => __('Add New Project', 'textdomain'),
-        'new_item'           => __('New Project', 'textdomain'),
-        'edit_item'          => __('Edit Project', 'textdomain'),
-        'view_item'          => __('View Project', 'textdomain'),
-        'all_items'          => __('All Projects', 'textdomain'),
-        'search_items'       => __('Search Projects', 'textdomain'),
-        'parent_item_colon'  => __('Parent Projects:', 'textdomain'),
-        'not_found'          => __('No projects found.', 'textdomain'),
-        'not_found_in_trash' => __('No projects found in Trash.', 'textdomain'),
+        'add_new_item'       => __('Add New Capstone', 'textdomain'),
+        'new_item'           => __('New Capstone', 'textdomain'),
+        'edit_item'          => __('Edit Capstone', 'textdomain'),
+        'view_item'          => __('View Capstone', 'textdomain'),
+        'all_items'          => __('All Capstones', 'textdomain'),
+        'search_items'       => __('Search Capstones', 'textdomain'),
+        'parent_item_colon'  => __('Parent Capstones:', 'textdomain'),
+        'not_found'          => __('No capstones found.', 'textdomain'),
+        'not_found_in_trash' => __('No capstones found in Trash.', 'textdomain'),
     );
 
 	$args = array(
