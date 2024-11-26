@@ -23,6 +23,8 @@ if ( ! empty( $block['className'] ) ) {
 
 $sponsors = array();
 
+// Use the taxonomy for the current post for the display if indicated.
+// Otherwise, grab the user supplied list of sponsors and use those.
 if ( $display === 'current' ) {
 	$post_id = get_the_ID();
 
@@ -31,15 +33,36 @@ if ( $display === 'current' ) {
 	}
 
 } else {
-	$sponsors[] = $selected;
+	// Handles edge case where no user selection has been made yet.
+	// Variable remains empty if $select is null/false.
+	if ( $selected ) {
+		$sponsors[] = $selected;
+	}
 }
 
-if ( $sponsors ) {
+
+/**
+ * Render logic.
+ * Display a "nothing selected" message only for the block editor if necessary.
+ * Render the selected sponsors otherwise,
+ */
+
+ if ( ! $sponsors ) {
+	if ( $is_preview ) {
+		echo '<div class="alert alert-info" role="alert">';
+
+		if ( $display === 'current' ) {
+			echo '<div class="alert-content">No terms selected for the capstone.</div></div>';
+		} else {
+			echo '<div class="alert-content">No sponsor selected.</div></div>';
+		}
+	}
+
+} else {
+
 	echo '<div class="sponsors ' . esc_html( $additional_classes ) . '" style="' . $spacing . '">';
 
 	foreach ($sponsors as $sponsor) {
-
-		do_action('qm/debug', $sponsor);
 
 		$sponsor_logo = get_field('sponsor_image', $sponsor);
 		$sponsor_url = get_field('sponsor_url', $sponsor);

@@ -16,7 +16,7 @@ $use_desc		= get_field( 'rtblock_description_yn');
 $themes = array();
 
 // Using the taxonomy for the current post to display the content if indicated.
-// Otherwise, grab the user suppliedlist of themes and use those.
+// Otherwise, grab the user supplied list of themes and use those.
 if ( $display === 'current' ) {
 	$post_id = get_the_ID();
     if ( $post_id ) {
