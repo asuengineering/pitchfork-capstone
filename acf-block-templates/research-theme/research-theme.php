@@ -15,27 +15,49 @@ $use_desc		= get_field( 'rtblock_description_yn');
 
 $themes = array();
 
+// Using the taxonomy for the current post to display the content if indicated.
+// Otherwise, grab the user suppliedlist of themes and use those.
 if ( $display === 'current' ) {
 	$post_id = get_the_ID();
-
     if ( $post_id ) {
 		$themes = wp_get_post_terms( $post_id, 'research_theme');
 	}
-
 } else {
-	$themes[] = $selected;
+	// Handles edge case where no selection has been made yet.
+	if ( $selected ) {
+		$themes[] = $selected;
+	}
 }
 
-foreach ($themes as $theme) {
+/**
+ * Render logic.
+ * Display a "nothing selected" message only for the block editor if necessary.
+ * Render the selected theme otherwise,
+ */
 
-	$themeicon = get_field('researchtheme_icon', $theme);
+if ( ! $themes ) {
+	if ( $is_preview ) {
+		echo '<div class="alert alert-info" role="alert">';
 
-	echo '<div class="media research-theme">';
-	echo '<img class="img-fluid" src="' . esc_url( $themeicon['url'] ) . '" alt="' . esc_attr( $themeicon['alt'] ) . '" />';
-	echo '<div class="media-body"><p class="like-h3">' . esc_html( $theme->name ) . '</p>';
-	if ( $use_desc ) {
-		echo wp_kses_post( $theme->description );
+		if ( $display === 'current' ) {
+			echo '<div class="alert-content">No terms selected for the capstone.</div></div>';
+		} else {
+			echo '<div class="alert-content">No research themes selected.</div></div>';
+		}
 	}
-	echo '</div></div>';
+} else {
 
+	foreach ($themes as $theme) {
+
+		$themeicon = get_field('researchtheme_icon', $theme);
+
+		echo '<div class="media research-theme">';
+		echo '<img class="img-fluid" src="' . esc_url( $themeicon['url'] ) . '" alt="' . esc_attr( $themeicon['alt'] ) . '" />';
+		echo '<div class="media-body"><p class="like-h3">' . esc_html( $theme->name ) . '</p>';
+		if ( $use_desc ) {
+			echo wp_kses_post( $theme->description );
+		}
+		echo '</div></div>';
+
+	}
 }
