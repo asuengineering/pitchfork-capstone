@@ -212,3 +212,34 @@ add_action('init', 'pitchfork_capstone_sponsor_tax');
     register_taxonomy('research_theme', 'project', $args);
 }
 add_action('init', 'pitchfork_capstone_research_theme_tax');
+
+/**
+ * TAX: research_tag
+ * Supports CPT: project
+ */
+
+ function pitchfork_capstone_research_tag_tax() {
+    $labels = array(
+        'name'              => _x('Research Tag', 'taxonomy general name', 'textdomain'),
+        'singular_name'     => _x('Research Tag', 'taxonomy singular name', 'textdomain'),
+        'search_items'      => __('Search Research Tags', 'textdomain'),
+        'all_items'         => __('All Research Tags', 'textdomain'),
+        'edit_item'         => __('Edit Research Tag', 'textdomain'),
+        'update_item'       => __('Update Research Tag', 'textdomain'),
+        'add_new_item'      => __('Add New Research Tag', 'textdomain'),
+        'new_item_name'     => __('New Research Tag Name', 'textdomain'),
+        'menu_name'         => __('Research Tags', 'textdomain'),
+    );
+
+    $args = array(
+        'hierarchical'      => false,
+        'labels'            => $labels,
+        'show_in_rest'      => true,
+        'public'            => true,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+    );
+
+    register_taxonomy('research_tag', 'project', $args);
+}
+add_action('init', 'pitchfork_capstone_research_tag_tax');
