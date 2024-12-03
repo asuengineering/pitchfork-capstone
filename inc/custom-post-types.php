@@ -235,7 +235,7 @@ add_action('init', 'pitchfork_capstone_research_theme_tax');
         'hierarchical'      => false,
         'labels'            => $labels,
         'show_in_rest'      => true,
-        'public'            => false,
+        'public'            => true,
         'show_ui'           => true,
         'show_admin_column' => true,
     );
