@@ -1,6 +1,6 @@
 {
   "name": "pitchfork-capstone",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A child theme for capstone.engineering.asu.edu. Built with Pitchfork",
   "repository": "asuengineering/pitchfork-capstone",
   "main": ".eslintrc.js",

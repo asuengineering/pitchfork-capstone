@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### Version 0.4
+
+- Adjustments for mobile display.
+- Make `research-tag` taxonomy public to include in query loop block.
+
 ### Version 0.3
 
 - Adjusted display od `research-theme` and `project-sponsor` blocks to display a warning to users in the block editor when taxonomy items or independent choices are not selected (null).
