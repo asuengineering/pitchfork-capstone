@@ -6,35 +6,20 @@
 @import "../src/unity-bootstrap-theme/_custom-asu-variables.scss";
 @import 'media-queries';
 
+/*--------------------------------------------------------------
+# Capstone Hero
+- (Mobile first)
+--------------------------------------------------------------*/
+
 .hero-capstone-wrap {
 	background-color: $uds-color-base-gray-2;
 	padding: $uds-size-spacing-4;
 }
 
 .hero-capstone {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	grid-template-rows: repeat(4, min-content);
-
-	max-width: 1220px;
-	margin-left: auto;
-	margin-right: auto;
 
 	.acf-innerblocks-container {
 		display: contents;
-	}
-
-	.wp-block-post-featured-image {
-		grid-column: 1;
-		grid-row: 1 / span 4;
-		margin-right: $uds-size-spacing-4;
-		max-width: 400px;
-		height: auto;
-	}
-
-	.acf-innerblocks-container>*:not(.wp-block-post-featured-image) {
-		grid-column: 2;
-		/* Position other elements in the second column */
 	}
 
 	// Used for
@@ -55,11 +40,36 @@
 	}
 }
 
-#details .dotted-left {
-	margin-left: 1rem;
-	padding-left: 3rem;
-	border-left: 2px dotted $uds-color-base-gray-4;
+// Desktop
+@include media-breakpoint-up($md) {
+	.hero-capstone {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		grid-template-rows: repeat(4, min-content);
+
+		max-width: 1220px;
+		margin-left: auto;
+		margin-right: auto;
+
+		.wp-block-post-featured-image {
+			grid-column: 1;
+			grid-row: 1 / span 4;
+			margin-right: $uds-size-spacing-4;
+			max-width: 400px;
+			height: auto;
+		}
+
+		.acf-innerblocks-container>*:not(.wp-block-post-featured-image) {
+			grid-column: 2;
+			/* Position other elements in the second column */
+		}
+	}
 }
+
+/*--------------------------------------------------------------
+# Sponsor block
+- Replicates a style found in Bootstrap v4 called a "media" element.
+--------------------------------------------------------------*/
 
 .media.research-theme {
 	display: flex;
@@ -98,12 +108,35 @@
 	}
 
 	img {
-		max-width: 150px;
+		max-width: 225px;
 		height: auto;
 		margin-bottom: $uds-size-spacing-2;
 	}
 
 	.sponsor-name {
 		margin-bottom: 0;
+	}
+}
+
+
+/*--------------------------------------------------------------
+# Template part, adds dotted line to desktop sidebar
+--------------------------------------------------------------*/
+
+// On mobile, produce dotted line ABOVE the column.
+@include media-breakpoint-down($md) {
+	.dotted-left {
+		margin-top: 1rem;
+		padding-top: 3rem;
+		border-top: 2px dotted $uds-color-base-gray-4;
+	}
+}
+
+// Desktop, the line is between the columns.
+@include media-breakpoint-up($md) {
+	.dotted-left {
+		margin-left: 1rem;
+		padding-left: 3rem;
+		border-left: 2px dotted $uds-color-base-gray-4;
 	}
 }
