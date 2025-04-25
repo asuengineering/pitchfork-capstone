@@ -121,6 +121,20 @@
 	}
 }
 
+// Mobile
+@include media-breakpoint-down($md) {
+	.media.project-sponsor.is-style-horizontal {
+
+		img {
+			max-width: 25vw;
+		}
+
+		.description {
+			display: none;
+		}
+	}
+}
+
 .media.project-sponsor+.media.project-sponsor {
 	margin-top: $uds-size-spacing-4;
 }
@@ -144,5 +158,92 @@
 		margin-left: 1rem;
 		padding-left: 3rem;
 		border-left: 2px dotted $uds-color-base-gray-4;
+	}
+}
+
+/*--------------------------------------------------------------
+# Taxonomy: Sponsor
+--------------------------------------------------------------*/
+.tax-sponsor {
+	#sponsor-header {
+
+		padding-top: $uds-size-spacing-6;
+		padding-bottom: $uds-size-spacing-12;
+
+		.subtitle {
+			// Like an H3, highlight-gold, except no header element for accessibility
+			-webkit-box-shadow: -0.15em 0 0 #ffc627, 0.15em 0 0 #ffc627;
+			box-shadow: -0.15em 0 0 #ffc627, 0.15em 0 0 #ffc627;
+			background: #ffc627;
+			color: #191919;
+
+			font-size: 1.5rem;
+			font-weight: 700;
+			line-height: 1.75rem;
+			letter-spacing: -0.0525rem;
+
+			margin-left: .15em;
+
+			display: inline-block;
+		}
+
+		.page-title {
+			margin-top: 0;
+		}
+
+		.details {
+			display: grid;
+			grid-template-columns: fit-content(70%) auto;
+			align-items: flex-start;
+			gap: 0 $uds-size-spacing-4;
+
+			img {
+				grid-column: 2;
+				grid-row: 1 / span 3;
+				max-width: 400px;
+			}
+
+			.archive-description {
+				grid-column: 1;
+				grid-row: 1;
+			}
+
+			.sponsor-link {
+				grid-column: 1;
+				grid-row: 2;
+
+				svg {
+					margin-right: $uds-size-spacing-1;
+				}
+			}
+		}
+	}
+
+	.related-projects {
+		background-color: $uds-color-base-gray-2;
+		padding: $uds-size-spacing-8 0;
+	}
+}
+
+// Mobile
+@include media-breakpoint-down($md) {
+	.tax-sponsor {
+		#sponsor-header {
+
+			padding-top: $uds-size-spacing-4;
+			padding-bottom: $uds-size-spacing-6;
+
+			.details {
+				display: flex;
+				flex-direction: column;
+
+				img {
+					max-width: none;
+					width: 100%;
+					margin: $uds-size-spacing-2 0;
+				}
+			}
+
+		}
 	}
 }

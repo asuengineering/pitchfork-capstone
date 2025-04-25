@@ -132,7 +132,7 @@ if ( ! $sponsors ) {
 		}
 
 		if ( $use_desc ) {
-			$block .= wp_kses_post( $sponsor->description );
+			$block .= '<p class="description">' . wp_kses_post( $sponsor->description ) . '</p>';
 		}
 
 		$block .= '</div></div>';
