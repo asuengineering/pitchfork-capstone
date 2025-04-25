@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### Version 0.5
+
+- Added options for `project-sponsor` block to adjust display in other use cases.
+- Created new layout for `taxonomy-sponsor.php` template.
+
 ### Version 0.4
 
 - Adjustments for mobile display.
