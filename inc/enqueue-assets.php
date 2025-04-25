@@ -28,7 +28,7 @@ function pitchfork_capstone_assets() {
 	wp_enqueue_style( 'pitchfork-capstone-styles', get_stylesheet_directory_uri() . '/dist/css/blocks.css', array(), $css_child_version );
 
 	$js_child_version = $theme_version . '.' . filemtime( get_stylesheet_directory() . '/dist/js/child-theme.js' );
-	wp_enqueue_style( 'pitchfork-capstone-script', get_stylesheet_directory_uri() . '/dist/js/child-theme.js', array(), $js_child_version );
+	wp_enqueue_script( 'pitchfork-capstone-script', get_stylesheet_directory_uri() . '/dist/js/child-theme.js', array(), $js_child_version );
 }
 
 // Allow styles added here to also be present within the block editor.

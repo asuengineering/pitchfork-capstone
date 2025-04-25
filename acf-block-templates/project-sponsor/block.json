@@ -19,7 +19,7 @@
 				"top",
 				"bottom"
 			],
-			"padding": false
+			"padding": true
 		},
 		"classname": true,
 		"align": false,
