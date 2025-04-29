@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### Version 0.6
+
+- Created custom excerpt filter for `project` post types. Avoids the words "abstract" or "summary" from appearing as the lead words if there is no user supplied excerpt for the capstone.
+
 ### Version 0.5
 
 - Added options for `project-sponsor` block to adjust display in other use cases.
