@@ -60,3 +60,54 @@ function capstone_award_bindings_callback() {
     }
     return 'No award selected';
 }
+
+/**
+ * Custom auto excerpt generation for post type = projects.
+ *
+ * - Replaces default wp_trim_excerpt behavior for 'project' post type.
+ * - Applies content filters, strips shortcodes and HTML tags.
+ * - Removes leading "Summary" or "Abstract" sections from content.
+ * - Truncates excerpt to 55 words (using excerpt_length and excerpt_more).
+ * - Returns sanitized, trimmed excerpt for use in archive, taxonomy, etc.
+ */
+function custom_trim_excerpt_remove_headers($excerpt, $post = null) {
+    global $post;
+
+    if (!$post || $post->post_type !== 'project') {
+        return $excerpt;
+    }
+
+    $content = $post->post_content;
+
+    // Apply content filters and strip shortcodes to approximate excerpt behavior
+    $content = apply_filters('the_content', $content);
+    $content = strip_shortcodes($content);
+    $content = wp_strip_all_tags($content);
+
+    // Remove line breaks to help regex parse more smoothly
+    $content = preg_replace('/\s+/', ' ', $content);
+
+	// do_action('qm/debug', $content);
+
+    // Use regex to remove leading "Summary" or "Abstract" sections
+    if (preg_match('/(?:Summary|Abstract)\s*(.*)/i', $content, $matches)) {
+		$trimmed = trim($matches[1]);
+    } else {
+        $trimmed = $content;
+    }
+
+    // Truncate to standard excerpt length
+    $excerpt_length = apply_filters('excerpt_length', 55);
+    $excerpt_more = apply_filters('excerpt_more', ' [&hellip;]');
+    $words = preg_split("/\s+/", $trimmed, $excerpt_length + 1, PREG_SPLIT_NO_EMPTY);
+
+    if (count($words) > $excerpt_length) {
+        array_pop($words);
+        $trimmed = implode(' ', $words) . $excerpt_more;
+    } else {
+        $trimmed = implode(' ', $words);
+    }
+
+    return $trimmed;
+}
+add_filter('wp_trim_excerpt', 'custom_trim_excerpt_remove_headers', 10, 2);
