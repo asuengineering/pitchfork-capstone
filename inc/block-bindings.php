@@ -50,7 +50,6 @@ function capstone_team_name_bindings_callback() {
 
 	if ( function_exists( 'get_field' ) ) {
         $team_name = get_field( 'capstone_meta_team_name', $post_id );
-		do_action('qm/debug', $team_name);
 
 		if ( ! empty ( $team_name ) ) {
 			return wp_kses_post( $team_name );
