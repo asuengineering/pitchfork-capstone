@@ -5,7 +5,7 @@
         {
             "key": "field_691ce958e17c3",
             "label": "Team name",
-            "name": "project_meta_team_name",
+            "name": "capstone_meta_team_name",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -43,5 +43,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763502610
+    "modified": 1763576334
 }
