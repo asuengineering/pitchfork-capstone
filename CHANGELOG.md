@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### Version 1.0
+
+Stable version of the theme.
+
+- ADD: Created meta field for capstone project "team name."
+- ADD: Created block binding `capstone/team-name` to allow for term display in templates and query loop sorting.
+
 ### Version 0.6
 
 - Created custom excerpt filter for `project` post types. Avoids the words "abstract" or "summary" from appearing as the lead words if there is no user supplied excerpt for the capstone.
