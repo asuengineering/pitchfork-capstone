@@ -7,7 +7,7 @@
 
   .alert-icon {
     flex: 0 0 $uds-size-spacing-8;
-    svg {
+    svg, span, i {
       font-size: $uds-size-spacing-4;
       //margin: 0.25rem 1rem;
     }
@@ -23,7 +23,10 @@
     .close
     {
       opacity: 1;
-      font-size: 1rem;
+      font-size: $uds-size-font-small;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       &:hover
       {
@@ -55,7 +58,7 @@
 div[class='alert alert-block'] {
   /* Catch-all for default alert class */
   background-color: $uds-color-background-gray;
-  border-color: $uds-color-base-gray-3;
+  border-color: $asu-gray-5;
 }
 
 // Media Queries
@@ -65,7 +68,7 @@ div[class='alert alert-block'] {
     // Adjust padding and margins.
     .alert-icon {
       flex: 0 0 $uds-size-spacing-6;
-      svg {
+      svg, span, i {
         font-size: $uds-size-spacing-4;
         //margin: 0.25rem 1rem;
         margin-top: $uds-size-spacing-2;

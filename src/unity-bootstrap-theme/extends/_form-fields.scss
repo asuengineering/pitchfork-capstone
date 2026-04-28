@@ -5,21 +5,34 @@ form.uds-form {
     margin: 0 0 $uds-size-spacing-4 0;
   }
 
+  --invalid-feedback-light-background: #{map-get(map-get($form-validation-states, 'invalid'), 'color')};
+
   /* Labels */
   label,
+  p,
   legend {
     font-size: $uds-size-spacing-2;
     margin-bottom: 0.5rem;
     // Labels for required fields.
-    svg.uds-field-required {
-      font-size: $uds-size-spacing-1;
-      margin-right: 0.25rem;
-      margin-bottom: 0.125rem;
-      color: $uds-color-brand-maroon;
+    svg, i, span {
+      &.uds-field-required {
+        font-size: $uds-size-spacing-1;
+        margin-right: 0.25rem;
+        margin-bottom: 0.125rem;
+        color: $uds-color-brand-maroon;
+      }
     }
 
     &.uds-form-label-disabled {
-      color: $uds-color-base-gray-6;
+      color: $asu-gray-2;
+    }
+
+    &.form-check-label::before{
+      margin-left: 0.4rem;
+    }
+
+    &.form-check-label::after{
+      margin-left: 0.4rem;
     }
   }
 
@@ -29,20 +42,20 @@ form.uds-form {
   /* Input text */
   .form-control,
   .form-select {
-    color: $uds-color-base-gray-7;
-    border: 1px solid $uds-color-base-gray-5;
+    color: $asu-gray-1;
+    border: 1px solid $asu-gray-3;
 
     &.is-invalid::placeholder {
-      color: $uds-color-base-gray-7;
+      color: $asu-gray-1;
     }
 
     /* Disabled input */
     &:disabled,
     &[readonly] {
-      color: $uds-color-base-gray-4;
-      background: $uds-color-base-gray-2;
+      color: $asu-gray-4;
+      background: $asu-gray-6;
       &::placeholder {
-        color: $uds-color-base-gray-6;
+        color: $asu-gray-2;
       }
     }
   }
@@ -61,9 +74,14 @@ form.uds-form {
   textarea:focus,
   select:focus {
     outline: none!important;
-    box-shadow: 0 0 0 1px $uds-color-base-gray-7 !important;
-    border: 1px solid $uds-color-base-gray-7 !important;
+    box-shadow: 0 0 0 1px $asu-gray-1 !important;
+    border: 1px solid $asu-gray-1 !important;
     border-radius: none;
+  }
+
+  input[type="submit"]:focus {
+    box-shadow: $uds-color-base-white 0 0 0 2px, $asu-gray-1 0px 0px 0px 4px !important;
+    border: 0 !important;
   }
 
   /* Radios and Checkboxes - For more flexible control, this is a departure
@@ -117,7 +135,7 @@ form.uds-form {
           position: absolute;
           display: inline-block;
           left: -2.25rem;
-          border: 1px solid $uds-color-base-gray-5;
+          border: 1px solid $asu-gray-3;
           width: $uds-size-spacing-3;
           height: $uds-size-spacing-3;
           background: white;
@@ -140,18 +158,18 @@ form.uds-form {
       }
       &:focus {
         + label::before {
-          border: 2px solid $uds-color-base-gray-7;
+          border: 2px solid $asu-gray-1;
         }
       }
       &:disabled {
         + label::before {
-          background: $uds-color-base-gray-2;
+          background: $asu-gray-6;
         }
       }
       // We can use this little trick here because the label follows the
       // disabled input.
       &:disabled + label {
-        color: $uds-color-base-gray-5;
+        color: $asu-gray-3;
       }
     }
 
@@ -201,17 +219,17 @@ form.uds-form {
   &.was-validated {
     .form-control:invalid {
       border-style: solid;
-      border: 1px solid $uds-color-font-dark-error;
-      border-bottom: 8px solid $uds-color-font-dark-error;
+      border: 1px solid var(--invalid-feedback-light-background);
+      border-bottom: 8px solid var(--invalid-feedback-light-background);
       // BS4 input height led to border eating padding. Resolved in variable
       // overrides by setting input heights to auto.
       &:focus {
-        border-bottom: 8px solid $uds-color-font-dark-error !important;
+        border-bottom: 8px solid var(--invalid-feedback-light-background) !important;
       }
     }
     // Radios and checks individual labels shouldn't be colored.
     .form-check-input:invalid ~ .form-check-label {
-      color: $uds-color-base-gray-7;
+      color: $asu-gray-1;
     }
 
     //&.was-validated .form-control:valid {
@@ -227,16 +245,7 @@ form.uds-form {
     }
     // Radios and checks individual labels shouldn't be colored.
     .form-check-input:valid ~ .form-check-label {
-      color: $uds-color-base-gray-7;
-    }
-  }
-  &.needs-validation {
-    .invalid-feedback {
-      display: none;
-    }
-
-    .valid-feedback {
-      display: none;
+      color: $asu-gray-1;
     }
   }
 
@@ -248,12 +257,12 @@ form.uds-form {
   textarea.is-invalid:enabled,
   select.is-invalid:enabled {
     border-style: solid;
-    border: 1px solid $uds-color-font-dark-error;
-    border-bottom: 8px solid $uds-color-font-dark-error;
+    border: 1px solid var(--invalid-feedback-light-background);
+    border-bottom: 8px solid var(--invalid-feedback-light-background);
     // BS4 input height led to border eating padding. Resolved in variable
     // overrides by setting input heights to auto.
     &:focus {
-      border-bottom: 8px solid $uds-color-font-dark-error !important;
+      border-bottom: 8px solid var(--invalid-feedback-light-background) !important;
     }
   }
   /* checks and radios */
@@ -269,16 +278,15 @@ form.uds-form {
   select ~ div.is-invalid {
     margin-left: inherit;
     margin-top: inherit;
-    color: $uds-color-font-dark-error;
+    color: var(--invalid-feedback-light-background);
   }
   .invalid-feedback {
     display: inline-block;
     font-weight: bold;
-    //color: $uds-color-base-gray-7;
-    svg {
+    svg, i, span {
       // We don't implement svg icons as bkg images due to need for color
       // manipulation.
-      color: $uds-color-font-dark-error;
+      color: var(--invalid-feedback-light-background);
       margin-right: $uds-size-spacing-1;
     }
   }
@@ -314,8 +322,7 @@ form.uds-form {
   .valid-feedback {
     display: inline-block;
     font-weight: bold;
-    //color: $uds-color-base-gray-7;
-    svg {
+    svg, i, span {
       // We don't implement svg icons as bkg images due to need for color
       // manipulation.
       color: $uds-color-font-dark-success;
@@ -325,11 +332,11 @@ form.uds-form {
 
   /* TRAILING ICON INPUT */
   .input-group-trailing-icon {
-    svg {
+    svg, i, span {
       position: absolute;
       right: 0.75rem;
       top: 0.75rem;
-      color: $uds-color-base-gray-7;
+      color: $asu-gray-1;
     }
   }
 
@@ -338,48 +345,63 @@ form.uds-form {
   &.uds-form-white {
     background-color: white;
   }
-  &.uds-form-gray1 {
-    background-color: $uds-color-base-gray-1;
+  &.uds-form-gray1, &.uds-form-faint-bg {
+    background-color: $asu-gray-7;
   }
-  &.uds-form-gray2 {
-    background-color: $uds-color-base-gray-2;
+  &.uds-form-gray2, &.uds-form-light-bg {
+    background-color: $asu-gray-6;
     /* Dark Radios and Checkboxes */
     .form-check {
       input[type='radio'],
       input[type='checkbox'] {
         &:disabled {
           + label::before {
-            background: $uds-color-base-gray-4;
-            border-color: $uds-color-base-gray-5;
+            background: $asu-gray-4;
+            border-color: $asu-gray-3;
           }
         }
         // We can use this little trick because the label follows the disabled
         // input.
         &:disabled + label {
-          color: $uds-color-base-gray-6;
+          color: $asu-gray-2;
         }
       }
     }
   }
-  &.uds-form-gray7 {
-    background-color: $uds-color-base-gray-7;
+  &.uds-form-gray7, &.uds-form-dark-bg {
+    background-color: $asu-gray-1;
+    color: $asu-gray-7;
+
+    label, legend {
+      svg, i, span {
+        &.uds-field-required {
+          color: $uds-color-base-gold;
+        }
+      }
+    }
 
     .form-control {
       &::placeholder {
-        color: $uds-color-base-gray-4;
+        color: $asu-gray-4;
       }
       &.is-invalid::placeholder {
-        color: $uds-color-base-gray-1;
+        color: $asu-gray-7;
+      }
+
+      &:invalid {
+        border-style: solid;
+        border: 1px solid $uds-color-font-dark-error;
+        border-bottom: 8px solid $uds-color-font-dark-error;
       }
 
       /* Disabled input */
       &:disabled,
       &[readonly] {
-        color: $uds-color-base-gray-5;
-        background: $uds-color-base-gray-6;
-        border: 1px solid $uds-color-base-gray-5;
+        color: $asu-gray-3;
+        background: $asu-gray-2;
+        border: 1px solid $asu-gray-3;
         &::placeholder {
-          color: $uds-color-base-gray-4;
+          color: $asu-gray-4;
         }
       }
     }
@@ -387,25 +409,25 @@ form.uds-form {
     /* Dark Labels */
     label,
     legend {
-      color: $uds-color-base-gray-1;
+      color: $asu-gray-7;
       &.uds-form-label-disabled {
-        color: $uds-color-base-gray-4;
+        color: $asu-gray-4;
       }
     }
     /* Dark Labels, checks, radios and selects, client side, tweaks */
     &.was-validated .form-check-input:valid ~ .form-check-label {
-      color: $uds-color-base-gray-1;
+      color: $asu-gray-7;
     }
     &.was-validated select ~ small.is-valid,
     &.was-validated select ~ div.is-valid {
       color: $uds-color-base-green;
     }
     &.was-validated .form-check-input:invalid ~ .form-check-label {
-      color: $uds-color-base-gray-1;
+      color: $asu-gray-7;
     }
     &.was-validated select ~ small.is-invalid,
     &.was-validated select ~ div.is-invalid {
-      color: $uds-color-alerts-error;
+      color: $uds-color-font-dark-error;
     }
     /* TODO Likely we'll find more work to do with client side validation rules
       in order to take advantage of having both valid/invalid markup present.
@@ -415,21 +437,21 @@ form.uds-form {
     input,
     textarea,
     select {
-      background-color: $uds-color-base-gray-7;
-      color: $uds-color-base-gray-1;
+      background-color: $asu-gray-1;
+      color: $asu-gray-7;
     }
     input::placeholder {
-      color: $uds-color-base-gray-4;
+      color: $asu-gray-4;
     }
     /* Dark Input focus */
     input:focus,
     textarea:focus,
     select:focus {
-      background-color: $uds-color-base-gray-7;
-      color: $uds-color-base-gray-1;
+      background-color: $asu-gray-1;
+      color: $asu-gray-7;
       outline: none!important;
-      box-shadow: 0 0 0 1px $uds-color-base-gray-1 !important;
-      border: 1px solid $uds-color-base-gray-1 !important;
+      box-shadow: 0 0 0 1px $asu-gray-7 !important;
+      border: 1px solid $asu-gray-7 !important;
       border-radius: none;
     }
 
@@ -441,7 +463,7 @@ form.uds-form {
           // Outer border.
           &::before {
             border: 1px solid #707070;
-            background: $uds-color-base-gray-7;
+            background: $asu-gray-1;
           }
           // Inner positioning for checked.
           &::after {
@@ -449,24 +471,24 @@ form.uds-form {
         }
         &:checked {
           + label::after {
-            background: $uds-color-base-gray-1;
+            background: $asu-gray-7;
           }
         }
         &:focus {
           + label::before {
-            border: 2px solid $uds-color-base-gray-1;
+            border: 2px solid $asu-gray-7;
           }
         }
         &:disabled {
           + label::before {
-            background: $uds-color-base-gray-6;
-            border-color: $uds-color-base-gray-5;
+            background: $asu-gray-2;
+            border-color: $asu-gray-3;
           }
         }
         // We can use this little trick because the label follows the disabled
         // input.
         &:disabled + label {
-          color: $uds-color-base-gray-4;
+          color: $asu-gray-4;
         }
       }
 
@@ -491,21 +513,21 @@ form.uds-form {
     textarea.is-invalid,
     select.is-invalid {
       border-style: solid;
-      border: 1px solid $uds-color-alerts-error;
-      border-bottom: 8px solid $uds-color-alerts-error !important;
+      border: 1px solid $uds-color-font-dark-error;
+      border-bottom: 8px solid $uds-color-font-dark-error !important;
       // BS4 input height led to border eating padding. Resolved in variable
       // overrides by setting input heights to auto.
       &:focus {
-        border-bottom: 8px solid $uds-color-alerts-error !important;
+        border-bottom: 8px solid $uds-color-font-dark-error !important;
       }
     }
     .invalid-feedback {
       font-weight: bold;
-      color: $uds-color-alerts-error;
-      svg {
+      color: $uds-color-font-dark-error;
+      svg, i, span {
         // We don't implement svg icons as bkg images due to need for color
         // manipulation.
-        color: $uds-color-alerts-error;
+        color: $uds-color-font-dark-error;
         margin-right: $uds-size-spacing-1;
       }
     }
@@ -526,7 +548,7 @@ form.uds-form {
     .valid-feedback {
       font-weight: bold;
       color: $uds-color-base-green;
-      svg {
+      svg, i, span {
         // We don't implement svg icons as bkg images due to need for color
         // manipulation.
         color: $uds-color-base-green;
@@ -535,8 +557,8 @@ form.uds-form {
     }
 
     .input-group-trailing-icon {
-      svg {
-        color: $uds-color-base-gray-1;
+      svg, i, span {
+        color: $asu-gray-7;
       }
     }
   }

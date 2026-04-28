@@ -36,7 +36,7 @@ blockquote:before {
 /*------------------------------------------------------------------
 2. Blockquote, mobile
 ------------------------------------------------------------------- */
-.uds-blockquote {
+.uds-blockquote, .uds-blockquoteAnimated {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: $uds-size-spacing-3;
@@ -52,7 +52,7 @@ blockquote:before {
 
   svg {
     grid-column: 1;
-    fill: $uds-color-base-gray-7;
+    fill: $asu-gray-1;
     width: $uds-size-spacing-5;
     height: auto;
   }
@@ -66,10 +66,8 @@ blockquote:before {
       margin-bottom: 0;
     }
 
-    p:last-of-type:after {
-      content: '\201D';
-    }
   }
+
 
   .citation {
     display: flex;
@@ -144,22 +142,69 @@ blockquote:before {
   }
 }
 
+.uds-blockquote {
+  blockquote {
+    p:last-of-type:after {
+      content: '\201D';
+    }
+  }
+}
+
+
+.uds-blockquoteAnimated {
+  h2 {
+    font-size: 4rem;
+    letter-spacing: -.14rem;
+    line-height: 4.25rem;
+    max-width: 100%;
+  }
+
+  a {
+    color: $black;
+  }
+}
+
+.pen-yellow {
+  background-image: linear-gradient(270deg, transparent 50%,  $uds-color-base-gold 0);
+  background-color: transparent;
+  background-position: 100%;
+  background-size: 200% 200%;
+  box-shadow: none;
+  transition: background-position .8s;
+  transition-delay: .2s;
+  padding: 0;
+}
+
+.animate-bg-in-scroll {
+  background-position: 0;
+}
+
 /*------------------------------------------------------------------
 3. Blockquote, mobile only
 ------------------------------------------------------------------- */
 
+
 @include media-breakpoint-down(sm) {
-  .uds-blockquote.no-cite.with-image {
+  .uds-blockquote, .uds-blockquoteAnimated {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 
-    blockquote,
-    h3 {
-      text-align: center;
+    svg {
+      margin-bottom: $uds-size-spacing-1;
+      width: $uds-size-spacing-5;
+    }
+
+    blockquote {
+      width: 100%;
+    }
+
+    .citation {
+      width: 100%;
     }
   }
 }
+
 
 /*------------------------------------------------------------------
 4. Blockquote, desktop
@@ -206,7 +251,7 @@ blockquote:before {
     &:before {
       content: '';
       display: block;
-      background-color: $uds-color-base-gray-7;
+      background-color: $asu-gray-1;
       height: $uds-size-spacing-half;
       width: $uds-size-spacing-9;
       margin: $uds-size-spacing-2 0;

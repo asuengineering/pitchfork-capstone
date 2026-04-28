@@ -1,3 +1,36 @@
+@mixin footer-links {
+  color: $asu-gray-6;
+  line-height: $uds-size-spacing-3;
+  text-decoration: none;
+
+  &:hover {
+    color: $uds-color-base-gold;
+    text-decoration: underline;
+  }
+}
+
+// Global link visited state
+a:visited:not(
+    .btn,
+    .nav-link,
+    .page-link,
+    .card-link,
+    header *,
+    footer *,
+    .uds-grid-links *
+  ) {
+  color: $uds-color-base-darkmaroon;
+}
+
+// Separate Secondary Nav link that matches nav link used in global footer
+// Will be used in future efforts to make link more reusable.
+.secondary-nav-link {
+  @extend .nav-link;
+  color: $uds-color-base-white;
+  padding: 0 0 $uds-size-spacing-2;
+  @include footer-links;
+}
+
 .img-background {
   background-size: cover;
   background-repeat: no-repeat;
@@ -44,14 +77,16 @@ label {
   margin-bottom: 0;
 }
 .card-title a {
-  color: $uds-color-base-gray-7;
+  color: $asu-gray-1;
   text-decoration: none;
+  display: inline-block;
+  margin: 4px;
 }
 .card-title a:hover {
   text-decoration: underline;
 }
 .card-degree .card-header .card-title:after {
-  content: '';
+  content: "";
   width: 32px;
   height: 4px;
   display: block;
@@ -62,7 +97,7 @@ label {
   background-color: $white;
 }
 .card-degree .card-footer a {
-  color: $uds-color-base-gray-7;
+  color: $asu-gray-1;
   text-decoration: none;
   font-weight: bold;
 }
@@ -87,16 +122,6 @@ label {
 .card-event .card-header {
   border-top: solid 4px $gold;
 }
-.bg-dark a,
-.bg-primary a,
-.bg-black a {
-  color: $light;
-}
-.bg-light a,
-.bg-secondary a,
-.bg-white a {
-  color: $primary;
-}
 
 .visually-hidden:not(:focus):not(:active),
 .visually-hidden-focusable:not(:focus):not(:active) {
@@ -115,5 +140,6 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none !important;
-  box-shadow: 0px 0px 0px 2px $uds-color-base-white, 0px 0px 0px 4px $uds-color-base-gray-7 !important;
+  box-shadow: 0px 0px 0px 2px $uds-color-base-white, 0px 0px 0px 4px $asu-gray-1 !important;
+  z-index: 1;
 }

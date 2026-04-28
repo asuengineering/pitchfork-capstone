@@ -9,7 +9,7 @@
 
   .banner-icon {
     text-align: left;
-    svg {
+    svg, i, span {
       font-size: $uds-size-spacing-4;
       margin: calc(#{$uds-size-spacing-1} / 2) $uds-size-spacing-4
         calc(#{$uds-size-spacing-1} / 2) 0;
@@ -18,32 +18,46 @@
   .banner-content {
     flex: 5;
     margin-right: $uds-size-spacing-4;
-    h3 {
+    h3, h1 {
       margin: $uds-size-spacing-1 $uds-size-spacing-0;
+      font-size: 1.5rem;
+      letter-spacing: -.0525rem;
+      line-height: 1.75rem;
     }
   }
   .banner-buttons {
     flex: 3;
     a,
     button {
-      margin-top: $uds-size-spacing-1;
-      margin-bottom: $uds-size-spacing-1;
+      margin-top: calc($uds-size-spacing-1 / 2);
+      margin-bottom: calc($uds-size-spacing-1 / 2);
       margin-left: 0;
     }
     // Do buttons in their own flexbox, column-style, no stretching.
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    a.btn.btn-sm.btn-dark{
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   .banner-close {
     flex: 2;
     margin-top: -$uds-size-spacing-2;
     margin-right: -$uds-size-spacing-2;
+    width: 12px;
 
     // Edits close button content (i.e. "X" inside bubble)
     .close {
       opacity: 1;
-      font-size: 1rem;
+      font-size: $uds-size-font-small;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       &:hover {
         opacity: 1;
@@ -90,8 +104,6 @@
   }
   a:visited:not(.btn) {
     color: $uds-color-font-light-visited;
-    // May need the following instead for proper contrast.
-    //color: $uds-color-base-gold;
   }
 }
 
@@ -104,7 +116,7 @@
       flex: 1;
       margin-bottom: $uds-size-spacing-1;
 
-      svg {
+      svg, i, span {
         font-size: $uds-size-spacing-5;
         margin: $uds-size-spacing-0;
       }
@@ -112,8 +124,11 @@
     .banner-content {
       margin-bottom: $uds-size-spacing-2;
 
-      h3 {
+      h3, h1 {
         margin-bottom: $uds-size-spacing-2;
+        font-size: 1.5rem;
+        letter-spacing: -.0525rem;
+        line-height: 1.75rem;
       }
     }
     .banner-close {

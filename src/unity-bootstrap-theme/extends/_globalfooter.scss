@@ -15,7 +15,7 @@ Footer - Table of Contents
 --------------------------------------------------------------------*/
 
 @mixin footer-links {
-  color: $uds-color-base-gray-2;
+  color: $asu-gray-6;
   line-height: $uds-size-spacing-3;
   text-decoration: none;
 
@@ -66,7 +66,7 @@ footer {
 
 #wrapper-endorsed-footer {
   a {
-    color: $uds-color-base-gray-2;
+    color: $asu-gray-6;
   }
 }
 
@@ -79,16 +79,16 @@ footer {
   a {
     margin-right: $uds-size-spacing-3;
     text-decoration: none;
-    color: $uds-color-base-gray-7;
+    color: $asu-gray-1;
   }
 }
 
 #wrapper-footer-colophon {
-  background-color: $uds-color-base-gray-2;
+  background-color: $asu-gray-6;
   a {
     margin-right: $uds-size-spacing-3;
     text-decoration: none;
-    color: $uds-color-base-gray-7;
+    color: $asu-gray-1;
   }
 }
 
@@ -98,19 +98,38 @@ footer {
 
 // #endorsed-footer, mobile first design
 
-#endorsed-logo img {
-  width: 100%;
-  height: auto;
+#endorsed-logo {
+  --endorsed-logo-display: block;
+  --endorsed-logo-padding-top: 12px;
+  --endorsed-logo-padding-bottom: 12px;
+  --endorsed-logo-img-max-height: 100%;
+  --endorsed-logo-img-width: 100%;
+  --endorsed-logo-img-max-width: 320px;
+  @include media-breakpoint-up(md) {
+    & {
+      --endorsed-logo-display: flex;
+      --endorsed-logo-padding-top: 20px;
+      --endorsed-logo-padding-bottom: 20px;
+      --endorsed-logo-img-max-height: 6rem;
+      --endorsed-logo-img-width: auto;
+    }
+  }
+  padding-top: var(--endorsed-logo-padding-top);
+  padding-bottom: var(--endorsed-logo-padding-bottom);
+  display: var(--endorsed-logo-display);
+  align-items: center;
 
-  /* Transform here scales an image which has embedded padding so that
-  it aligns with the Bootstrap grid. */
-  transform: scale(1.13);
-
-  /* Once transformed, the endorsed logo will have approx 20px of vertical
-  "padding" between the top of the logo and black section border. Adding
-  12px provides an approximate 2rem top/bottom margin. */
-
-  margin: 12px 0;
+  img {
+    width: var(--endorsed-logo-img-width);
+    max-width: var(--endorsed-logo-img-max-width);
+    height: auto;
+    max-height: var(--endorsed-logo-img-max-height);
+    /* Transform here scales an image which has embedded padding so that
+    it aligns with the Bootstrap grid. */
+    transform: scale(1.13);
+    padding: 0;
+    margin: 0;
+  }
 }
 
 #endorsed-footer {
@@ -121,9 +140,13 @@ footer {
 
     .nav-link {
       font-size: $uds-size-icon-base;
-      color: $uds-color-base-gray-4;
+      color: $asu-gray-4;
       line-height: 1;
-      padding-top: 7px; // Magic number. Reducing the padding by 1px to make the height = 48px.
+      padding: 7px 16px; // Magic number. Reducing the padding by 1px to make the height = 48px.
+
+      :hover {
+        color: $uds-color-base-white;
+      }
     }
   }
 }
@@ -137,17 +160,6 @@ footer {
 
 // #endorsed-footer, up to desktop
 @include media-breakpoint-up(md) {
-  #endorsed-logo {
-    display: flex;
-    align-items: center;
-    img {
-      box-sizing: border-box;
-      padding: 0.5rem 0 0.5rem 0;
-      max-height: $uds-size-spacing-14;
-      width: auto;
-    }
-  }
-
   #social-media .nav {
     padding: $uds-size-spacing-5 0;
     justify-content: flex-end;
@@ -197,8 +209,8 @@ footer {
       border-top: 1px solid $uds-color-divider-lighter;
       padding-left: 0;
 
-      a {
-        color: $uds-color-base-gray-2;
+      a, button {
+        color: $asu-gray-6;
         padding: $uds-size-spacing-3 0;
         text-decoration: none;
 
@@ -236,7 +248,7 @@ footer {
         border-top: 0;
         padding: 0;
 
-        a {
+        a, button {
           padding: 0;
           cursor: default;
         }
@@ -273,15 +285,25 @@ footer {
     .img-link {
       order: 2;
       margin-right: 0;
+      padding-bottom: 24px;
+      padding-top: 24px;
       transform: translate(1.5rem, 0);
+      @include media-breakpoint-up(lg) {
+        padding-right: 16px;
+      }
       img {
-        height: 100px;
+        height: auto;
+        max-width: 320px;
         width: auto;
       }
     }
 
     .nav-link {
       padding: 0;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
@@ -305,6 +327,18 @@ footer {
   }
 }
 
+@include media-breakpoint-down(sm) {
+  #footer-innovation {
+    .footer-innovation-links {
+      .img-link {
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
 /*------------------------------------------------------------------
 7. Footer Colophon (#footer-colophon)
 --------------------------------------------------------------------*/
@@ -317,6 +351,10 @@ footer {
 
 #footer-colophon .nav-link {
   padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 // #footer-colophon, Mobile
@@ -324,5 +362,28 @@ footer {
 @include media-breakpoint-down(md) {
   #footer-colophon {
     @include nav-to-grid;
+  }
+}
+
+/*------------------------------------------------------------------
+8. Footer Colophon - Cookie Consent
+--------------------------------------------------------------------*/
+.footer-legal-links,
+.footer-menu,
+.nav {
+  &.colophon #manualConsentoptout,
+  #manualConsentoptout {
+    color: #484848;
+    border: none;
+    background-color: transparent;
+    width: auto;
+    cursor: pointer;
+    padding: 0;
+    text-align: right;
+    justify-self: end;
+    font-size: 1rem;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

@@ -73,9 +73,34 @@ div[class^="uds-hero"] {
   align-content: flex-end;
   margin-bottom: $uds-size-spacing-8;
 
+  header {
+    display: grid;
+    grid-column: 2;
+    grid-row: 2;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    margin-top: $uds-size-spacing-10;
+
+    p {
+      margin: 0;
+    }
+
+    h1,
+    .h1,
+    [role="doc-subtitle"], // UDS is deprecatated doc-subtitle as a Selector
+    .hero-subtitle,
+    a.btn,
+    a.uds-modal-close-btn,
+    .content,
+    .btn-row {
+      grid-column: 1;
+    }
+  }
+
   // Column alignment for decendent items
   h1,
-  [role="doc-subtitle"],
+  [role="doc-subtitle"], // UDS is deprecatated doc-subtitle as a Selector
+  .hero-subtitle,
   a.btn,
   .content,
   .btn-row {
@@ -92,7 +117,8 @@ div[class^="uds-hero"] {
     object-fit: cover;
   }
 
-  [role="doc-subtitle"] {
+  [role="doc-subtitle"], // UDS is deprecatated doc-subtitle as a Selector
+  .hero-subtitle {
     @include like-h3;
     display: inline-block;
     grid-row: 2;
@@ -186,7 +212,7 @@ div[class^="uds-hero"] {
 }
 
 div.uds-hero-sm {
-  height: $uds-size-spacing-32;
+  min-height: $uds-size-spacing-32;
   grid-template-rows: 1fr auto auto 3rem;
 
   h1,
@@ -219,7 +245,7 @@ div.uds-hero-sm {
     }
 
     .hero-overlay {
-      height: $uds-size-spacing-32;
+      min-height: $uds-size-spacing-32;
     }
   }
 
@@ -229,7 +255,7 @@ div.uds-hero-sm {
 }
 
 div.uds-hero-md {
-  height: 21rem;
+  min-height: 21rem;
   // by design, the hero-md has no content on mobile, change grid template rows and hide .content
   grid-template-rows: 1fr auto auto 3rem;
 
@@ -245,7 +271,7 @@ div.uds-hero-md {
     }
 
     .hero-overlay {
-      height: 21rem;
+      min-height: 21rem;
     }
   }
 
@@ -256,7 +282,11 @@ div.uds-hero-md {
 }
 
 div.uds-hero-lg {
-  height: $uds-size-spacing-64;
+  min-height: $uds-size-spacing-64;
+
+  .content {
+    display: none;
+  }
 
   h1 {
     margin-bottom: $uds-size-spacing-2;
@@ -278,7 +308,7 @@ div.uds-hero-lg {
     }
 
     .hero-overlay {
-      height: $uds-size-spacing-64;
+      min-height: $uds-size-spacing-64;
     }
   }
 
@@ -303,10 +333,10 @@ div.uds-hero-lg {
 
     // Column alignment for decendent items
     h1,
-    [role="doc-subtitle"],
+    [role="doc-subtitle"], // UDS is deprecatated doc-subtitle as a Selector
+    .hero-subtitle,
     a.btn,
-    .content,
-    .btn-row {
+    .content{
       grid-column: 2;
       max-width: 700px;
       z-index: 30;
@@ -345,22 +375,26 @@ div.uds-hero-lg {
   }
 
   div.uds-hero-sm {
-    grid-template-rows: 1fr auto auto $uds-size-spacing-7;
-    &.has-btn-row {
-      .btn-row {
-        top: 14.5rem;
-      }
-    }
+    grid-template-rows: 0px 1fr auto auto;
 
     > a.btn {
-      grid-row: unset;
-      position: absolute;
-      top: 14.5rem;
+      position: relative;
+      top: auto;
+      grid-row: 4;
+    }
+
+    &.has-btn-row {
+      .btn-row {
+        position: relative;
+        margin-top: 1rem;
+        top: auto;
+        grid-row: 4;
+      }
     }
   }
 
   div.uds-hero-md {
-    height: $uds-size-spacing-64;
+    min-height: $uds-size-spacing-64;
     // TODO; remove this, it's a fallback for buttons without has-btn-row
     grid-template-rows: 1fr repeat(4, auto) $uds-size-spacing-6;
     h1 {
@@ -389,15 +423,19 @@ div.uds-hero-lg {
       }
 
       .hero-overlay {
-        height: $uds-size-spacing-64;
+        min-height: $uds-size-spacing-64;
       }
     }
   }
 
   div.uds-hero-lg {
-    height: 42.75rem;
+    min-height: 42.75rem;
     // TODO; remove this, it's a fallback for buttons without has-btn-row
     grid-template-rows: 1fr repeat(4, auto) $uds-size-spacing-6;
+
+    .content {
+      display: block;
+    }
 
     &.has-btn-row {
       grid-template-rows: 1fr repeat(4, auto) $uds-size-spacing-6;
@@ -414,7 +452,7 @@ div.uds-hero-lg {
       }
 
       .hero-overlay {
-        height: 42.75rem;
+        min-height: 42.75rem;
       }
     }
 
@@ -437,10 +475,10 @@ div.uds-hero-lg {
 
     // Column alignment for decendent items
     h1,
-    [role="doc-subtitle"],
+    [role="doc-subtitle"], // UDS is deprecatated doc-subtitle as a Selector
+    .hero-subtitle,
     a.btn,
-    .content,
-    .btn-row {
+    .content {
       max-width: calc(940px - 30%);
     }
   }
@@ -452,16 +490,16 @@ div.uds-hero-lg {
 
     // Column alignment for decendent items
     h1,
-    [role="doc-subtitle"],
+    [role="doc-subtitle"], // UDS is deprecatated doc-subtitle as a Selector
+    .hero-subtitle,
     a.btn,
-    .content,
-    .btn-row {
+    .content {
       max-width: calc(1200px - 34%);
     }
   }
 
   div.uds-hero-lg {
-    height: 42.75rem;
+    min-height: 42.75rem;
 
     &.uds-video-hero {
       position: relative;

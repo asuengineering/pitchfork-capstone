@@ -25,13 +25,13 @@
   a {
     display: flex;
     @include like-an-h4;
-    border: 1px solid $uds-color-base-gray-3;
-    color: $uds-color-base-gray-7;
+    border: 1px solid $asu-gray-5;
+    color: $asu-gray-1;
     background-color: $uds-color-base-white;
     padding: $uds-size-spacing-3;
     text-decoration: none;
 
-    svg {
+    svg, span {
       margin: calc(#{$uds-size-spacing-1} / 2) $uds-size-spacing-1 0 0;
     }
 
@@ -42,12 +42,12 @@
 
   &.text-gold a {
     color: $uds-color-base-gold;
-    background-color: $uds-color-base-gray-7;
+    background-color: $asu-gray-1;
   }
 
   &.text-white a {
     color: $uds-color-base-white;
-    background-color: $uds-color-base-gray-7;
+    background-color: $asu-gray-1;
   }
 }
 
