@@ -18,6 +18,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Other hooks and actions available if needed.
  */
 
+/**
+ * Conditionally enqueue Isotope for the Capstone Isotope block.
+ * Load isotope before child-theme.js so it's available as a dependency.
+ */
+add_action( 'wp_enqueue_scripts', 'pitchfork_capstone_enqueue_isotope', 5 );
+function pitchfork_capstone_enqueue_isotope() {
+	if ( has_block( 'acf/capstone-isotope' ) ) {
+		wp_enqueue_script( 'isotope', get_stylesheet_directory_uri() . '/src/isotope-layout/isotope.pkgd.min.js', array(), '3.0.6', true );
+	}
+}
+
 add_action( 'enqueue_block_assets', 'pitchfork_capstone_assets' );
 function pitchfork_capstone_assets() {
 	// Get the theme data.
@@ -28,7 +39,12 @@ function pitchfork_capstone_assets() {
 	wp_enqueue_style( 'pitchfork-capstone-styles', get_stylesheet_directory_uri() . '/dist/css/blocks.css', array(), $css_child_version );
 
 	$js_child_version = $theme_version . '.' . filemtime( get_stylesheet_directory() . '/dist/js/child-theme.js' );
-	wp_enqueue_script( 'pitchfork-capstone-script', get_stylesheet_directory_uri() . '/dist/js/child-theme.js', array(), $js_child_version );
+	// Add isotope as a dependency if the capstone-isotope block is present
+	$deps = array();
+	if ( has_block( 'acf/capstone-isotope' ) ) {
+		$deps[] = 'isotope';
+	}
+	wp_enqueue_script( 'pitchfork-capstone-script', get_stylesheet_directory_uri() . '/dist/js/child-theme.js', $deps, $js_child_version, true );
 }
 
 // Allow styles added here to also be present within the block editor.

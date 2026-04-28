@@ -247,3 +247,78 @@
 		}
 	}
 }
+
+/*--------------------------------------------------------------
+# Capstone Isotope Block
+--------------------------------------------------------------*/
+
+.capstone-isotope {
+	.isotope-filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: $uds-size-spacing-3;
+		margin-bottom: $uds-size-spacing-4;
+
+		.filter-group {
+			display: flex;
+			flex-direction: column;
+			min-width: 150px;
+
+			label {
+				font-weight: bold;
+				margin-bottom: $uds-size-spacing-2;
+			}
+
+			select,
+			input {
+				padding: $uds-size-spacing-2;
+				border: 1px solid $uds-color-base-gray-4;
+				border-radius: $uds-size-border-radius;
+			}
+		}
+	}
+
+	.isotope-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: $uds-size-spacing-4;
+
+		.project-card {
+			.card {
+				height: 100%;
+
+				.card-img-top {
+					height: 200px;
+					object-fit: cover;
+				}
+
+				.card-body {
+					display: flex;
+					flex-direction: column;
+
+					.card-title {
+						margin-bottom: $uds-size-spacing-2;
+
+						a {
+							text-decoration: none;
+							color: inherit;
+
+							&:hover {
+								text-decoration: underline;
+							}
+						}
+					}
+
+					.card-team {
+						font-style: italic;
+						margin-bottom: $uds-size-spacing-2;
+					}
+
+					.card-text {
+						flex-grow: 1;
+					}
+				}
+			}
+		}
+	}
+}

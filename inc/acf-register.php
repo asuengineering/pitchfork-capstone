@@ -41,6 +41,7 @@ function pitchfork_capstone_theme_acf_init_block_types() {
 		'/hero-capstone',               // Capstone Hero
 		'/research-theme',              // Research Theme Block
 		'/project-sponsor',             // Sponsor
+		'/capstone-isotope',            // Capstone Isotope Block
 	);
 
 	// Loop through array items and register each block.

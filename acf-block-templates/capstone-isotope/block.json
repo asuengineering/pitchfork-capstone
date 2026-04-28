@@ -1,0 +1,35 @@
+{
+    "name": "acf/capstone-isotope",
+    "title": "Capstone Projects Isotope",
+    "description": "Interactive block displaying capstone projects with isotope filters.",
+    "category": "pitchfork-engnews",
+    "icon": "grid-view",
+    "keywords": [
+        "capstone",
+        "projects",
+        "filterable",
+        "isotope"
+    ],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "capstone-isotope.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "anchor": true,
+        "spacing": {
+            "margin": [
+                "top",
+                "bottom"
+            ],
+            "padding": false
+        },
+        "classname": true,
+        "align": false,
+        "color": {
+            "background": false,
+            "text": false,
+            "link": false
+        }
+    }
+}
