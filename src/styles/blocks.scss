@@ -248,76 +248,90 @@
 	}
 }
 
-/*--------------------------------------------------------------
-# Capstone Isotope Block
---------------------------------------------------------------*/
-
 .capstone-isotope {
-	.isotope-filters {
-		display: flex;
-		flex-wrap: wrap;
-		gap: $uds-size-spacing-3;
+
+	/* -------------------------
+	   MOBILE (default)
+	------------------------- */
+	.card {
+		height: auto;
+	}
+
+	.col-filters {
+		background-color: $uds-color-base-gray-2;
+		padding: $uds-size-spacing-4;
 		margin-bottom: $uds-size-spacing-4;
+	}
 
-		.filter-group {
-			display: flex;
-			flex-direction: column;
-			min-width: 150px;
+	.isotope-results {
+		position: relative;
+	}
 
-			label {
-				font-weight: bold;
-				margin-bottom: $uds-size-spacing-2;
-			}
+	.project-card {
+		width: 100%;
+		margin-bottom: $uds-size-spacing-4;
+		margin-right: $uds-size-spacing-4;
+		position: absolute;
 
-			select,
-			input {
-				padding: $uds-size-spacing-2;
-				border: 1px solid $uds-color-base-gray-4;
-				border-radius: $uds-size-border-radius;
-			}
+		/* 🔥 HIDE META ON MOBILE */
+		.card-meta-wrapper {
+			display: none;
 		}
 	}
 
-	.isotope-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		gap: $uds-size-spacing-4;
+
+	/* -------------------------
+	   DESKTOP
+	------------------------- */
+
+	@include media-breakpoint-up($md) {
+
+		.isotope-layout {
+			display: grid;
+			grid-template-columns: 1fr 3fr;
+			gap: 2rem;
+		}
+
+		.col-filters {
+			background-color: transparent;
+			padding: 0;
+			margin-bottom: 0;
+		}
 
 		.project-card {
-			.card {
-				height: 100%;
+			width: calc(50% - 2rem);
 
-				.card-img-top {
-					height: 200px;
-					object-fit: cover;
+			/* ❌ remove fixed height issues */
+			height: auto;
+			min-height: 0;
+		}
+
+		/* 🔥 SHOW META AGAIN */
+		.project-card .card-meta-wrapper {
+			display: block;
+			padding: $uds-size-spacing-4;
+			background: $uds-color-base-gray-1;
+			border-top: 1px solid $uds-color-base-gray-3;
+		}
+
+		.project-card .card-meta {
+			display: grid;
+			grid-template-columns: auto 1fr;
+			row-gap: $uds-size-spacing-1;
+			column-gap: $uds-size-spacing-2;
+
+			dt {
+				font-weight: 700;
+				font-size: 0.875rem;
+
+				&::after {
+					content: ":";
 				}
+			}
 
-				.card-body {
-					display: flex;
-					flex-direction: column;
-
-					.card-title {
-						margin-bottom: $uds-size-spacing-2;
-
-						a {
-							text-decoration: none;
-							color: inherit;
-
-							&:hover {
-								text-decoration: underline;
-							}
-						}
-					}
-
-					.card-team {
-						font-style: italic;
-						margin-bottom: $uds-size-spacing-2;
-					}
-
-					.card-text {
-						flex-grow: 1;
-					}
-				}
+			dd {
+				margin: 0;
+				font-size: 0.875rem;
 			}
 		}
 	}

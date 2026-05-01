@@ -32,17 +32,14 @@ wp.domReady(() => {
  */
 function initIsotopeBlocks() {
 	if (typeof Isotope === 'undefined') {
-		// Isotope not yet loaded, retry in 100ms
 		setTimeout(initIsotopeBlocks, 100);
 		return;
 	}
 
-	const isotopeContainers = document.querySelectorAll('.capstone-isotope .isotope-grid');
+	const isotopeContainers = document.querySelectorAll('.capstone-isotope .isotope-results');
+
 	isotopeContainers.forEach(container => {
-		// Skip if already initialized
-		if (container.dataset.isotopeInitialized) {
-			return;
-		}
+		if (container.dataset.isotopeInitialized) return;
 
 		const iso = new Isotope(container, {
 			itemSelector: '.project-card',
@@ -51,27 +48,39 @@ function initIsotopeBlocks() {
 
 		container.dataset.isotopeInitialized = 'true';
 
-		// Filter selects
-		const filterSelects = container.parentNode.querySelectorAll('.filter-select');
+		const block = container.closest('.capstone-isotope');
+
+		// MULTI FILTER SUPPORT
+		const filters = {};
+		const filterSelects = block.querySelectorAll('.filter.form-select');
+
 		filterSelects.forEach(select => {
 			select.addEventListener('change', function () {
-				const filterValue = this.value;
+				const group = this.dataset.filterGroup;
+				filters[group] = this.value;
+
+				const filterValue = Object.values(filters).join('');
 				iso.arrange({ filter: filterValue });
 			});
 		});
 
-		// Search input
-		const searchInput = container.parentNode.querySelector('.filter-search');
+		// SEARCH
+		const searchInput = block.querySelector('#filter-search');
+
 		if (searchInput) {
 			let searchTimeout;
+
 			searchInput.addEventListener('input', function () {
 				clearTimeout(searchTimeout);
+
 				searchTimeout = setTimeout(() => {
 					const searchValue = this.value.toLowerCase();
+
 					iso.arrange({
 						filter: function (itemElem) {
 							const title = itemElem.getAttribute('data-title').toLowerCase();
 							const team = itemElem.getAttribute('data-team').toLowerCase();
+
 							return title.includes(searchValue) || team.includes(searchValue);
 						}
 					});
@@ -81,10 +90,8 @@ function initIsotopeBlocks() {
 	});
 }
 
-// Initialize on DOMContentLoaded
 if (document.readyState === 'loading') {
 	document.addEventListener('DOMContentLoaded', initIsotopeBlocks);
 } else {
-	// DOM already loaded
 	initIsotopeBlocks();
 }

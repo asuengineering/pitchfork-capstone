@@ -179,65 +179,155 @@ if ($the_query->have_posts()) {
         $excerpt = get_the_excerpt();
         $permalink = get_permalink();
 
-        $card_output = '<div class="' . esc_attr($class_attr) . '" data-title="' . esc_attr($title) . '" data-team="' . esc_attr($team_name) . '">';
-        $card_output .= '<div class="card">';
-        if (has_post_thumbnail()) {
-            $card_output .= '<img src="' . get_the_post_thumbnail_url($post_id, 'medium') . '" alt="' . esc_attr($title) . '" class="card-img-top" />';
-        }
-        $card_output .= '<div class="card-body">';
-        $card_output .= '<h5 class="card-title"><a href="' . esc_url($permalink) . '">' . esc_html($title) . '</a></h5>';
-        if (!empty($team_name)) {
-            $card_output .= '<p class="card-team">Team: ' . esc_html($team_name) . '</p>';
-        }
-        $card_output .= '<p class="card-text">' . esc_html($excerpt) . '</p>';
-        $card_output .= '</div></div></div>';
+		$card_output = '<div class="card ' . esc_attr($class_attr) . '" data-title="' . esc_attr($title) . '" data-team="' . esc_attr($team_name) . '">';
 
-        $cards_output .= $card_output;
-    }
+		// Image
+		if (has_post_thumbnail()) {
+			$card_output .= '<img src="' . get_the_post_thumbnail_url($post_id, 'medium') . '" alt="' . esc_attr($title) . '" class="card-img-top" />';
+		}
 
-    // Build filters
-    $filter_output = '<div class="isotope-filters">';
+		// Header (title)
+		$card_output .= '<div class="card-header">';
+		$card_output .= '<h3 class="card-title">';
+		$card_output .= '<a href="' . esc_url($permalink) . '">' . esc_html($title) . '</a>';
+		$card_output .= '</h3>';
+		$card_output .= '</div>';
 
-    $filter_output .= '<div class="filter-group"><label for="filter-program-date">Program Date</label><select id="filter-program-date" class="filter-select" data-filter-group="program_date"><option value="">All Program Dates</option>';
-    foreach ($program_date_index as $slug => $name) {
-        $filter_output .= '<option value=".program_date-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
-    }
-    $filter_output .= '</select></div>';
+		// Body (ONLY description now)
+		$card_output .= '<div class="card-body">';
+		$card_output .= '<p class="card-text">' . esc_html($excerpt) . '</p>';
+		$card_output .= '</div>';
 
-    $filter_output .= '<div class="filter-group"><label for="filter-program">Program</label><select id="filter-program" class="filter-select" data-filter-group="program"><option value="">All Programs</option>';
-    foreach ($program_index as $slug => $name) {
-        $filter_output .= '<option value=".program-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
-    }
-    $filter_output .= '</select></div>';
+		// Meta section OUTSIDE body
+		$card_output .= '<div class="card-meta-wrapper">';
+		$card_output .= '<dl class="card-meta">';
 
-    $filter_output .= '<div class="filter-group"><label for="filter-sponsor">Sponsor</label><select id="filter-sponsor" class="filter-select" data-filter-group="sponsor"><option value="">All Sponsors</option>';
-    foreach ($sponsor_index as $slug => $name) {
-        $filter_output .= '<option value=".sponsor-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
-    }
-    $filter_output .= '</select></div>';
+		// PROGRAM
+		if (!empty($program_terms) && !is_wp_error($program_terms)) {
+			$program_names = wp_list_pluck($program_terms, 'name');
+			$card_output .= '<dt>Program</dt><dd>' . esc_html(implode(', ', $program_names)) . '</dd>';
+		}
 
-    $filter_output .= '<div class="filter-group"><label for="filter-research-tag">Research Tag</label><select id="filter-research-tag" class="filter-select" data-filter-group="research_tag"><option value="">All Research Tags</option>';
-    foreach ($research_tag_index as $slug => $name) {
-        $filter_output .= '<option value=".research_tag-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
-    }
-    $filter_output .= '</select></div>';
+		// TEAM
+		if (!empty($team_name)) {
+			$card_output .= '<dt>Team</dt><dd>' . esc_html($team_name) . '</dd>';
+		}
 
-    $filter_output .= '<div class="filter-group"><label for="filter-team">Team Name</label><select id="filter-team" class="filter-select" data-filter-group="team"><option value="">All Teams</option>';
-    foreach ($team_index as $slug => $name) {
-        $filter_output .= '<option value=".team-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
-    }
-    $filter_output .= '</select></div>';
+		// SPONSOR
+		if (!empty($sponsor_terms) && !is_wp_error($sponsor_terms)) {
+			$sponsor_names = wp_list_pluck($sponsor_terms, 'name');
+			$card_output .= '<dt>Sponsor</dt><dd>' . esc_html(implode(', ', $sponsor_names)) . '</dd>';
+		}
 
-    $filter_output .= '<div class="filter-group"><label for="filter-search">Search</label><input type="text" id="filter-search" class="filter-search" placeholder="' . esc_attr($search_placeholder) . '" /></div>';
+		// RESEARCH TAG
+		if (!empty($research_tag_terms) && !is_wp_error($research_tag_terms)) {
+			$tag_names = wp_list_pluck($research_tag_terms, 'name');
+			$card_output .= '<dt>Research</dt><dd>' . esc_html(implode(', ', $tag_names)) . '</dd>';
+		}
 
-    $filter_output .= '</div>';
+		$card_output .= '</dl>';
 
-    $output = $filter_output . '<div class="isotope-grid">' . $cards_output . '</div>';
+		$card_output .= '</div></div>';
+
+		$cards_output .= $card_output;
+	}
+
+	// Build filters (MATCHING NEWS SITE STRUCTURE)
+	$filter_output = '<div class="col-filters">';
+
+	// PROGRAM DATE
+	$filter_output .= '<form class="uds-form" role="search" aria-label="Filter by program date">';
+	$filter_output .= '<div class="form-group">';
+	$filter_output .= '<label for="filter-program-date">Program Date</label>';
+	$filter_output .= '<select id="filter-program-date" class="filter form-select" data-filter-group="program_date">';
+	$filter_output .= '<option value=""> — select a program date — </option>';
+
+	foreach ($program_date_index as $slug => $name) {
+		$filter_output .= '<option value=".program_date-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
+	}
+
+	$filter_output .= '</select></div></form>';
+
+
+	// PROGRAM
+	$filter_output .= '<form class="uds-form" role="search" aria-label="Filter by program">';
+	$filter_output .= '<div class="form-group">';
+	$filter_output .= '<label for="filter-program">Program</label>';
+	$filter_output .= '<select id="filter-program" class="filter form-select" data-filter-group="program">';
+	$filter_output .= '<option value=""> — select a program — </option>';
+
+	foreach ($program_index as $slug => $name) {
+		$filter_output .= '<option value=".program-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
+	}
+
+	$filter_output .= '</select></div></form>';
+
+
+	// SPONSOR
+	$filter_output .= '<form class="uds-form" role="search" aria-label="Filter by sponsor">';
+	$filter_output .= '<div class="form-group">';
+	$filter_output .= '<label for="filter-sponsor">Sponsor</label>';
+	$filter_output .= '<select id="filter-sponsor" class="filter form-select" data-filter-group="sponsor">';
+	$filter_output .= '<option value=""> — select a sponsor — </option>';
+
+	foreach ($sponsor_index as $slug => $name) {
+		$filter_output .= '<option value=".sponsor-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
+	}
+
+	$filter_output .= '</select></div></form>';
+
+
+	// RESEARCH TAG
+	$filter_output .= '<form class="uds-form" role="search" aria-label="Filter by research tag">';
+	$filter_output .= '<div class="form-group">';
+	$filter_output .= '<label for="filter-research-tag">Research Tag</label>';
+	$filter_output .= '<select id="filter-research-tag" class="filter form-select" data-filter-group="research_tag">';
+	$filter_output .= '<option value=""> — select a research tag — </option>';
+
+	foreach ($research_tag_index as $slug => $name) {
+		$filter_output .= '<option value=".research_tag-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
+	}
+
+	$filter_output .= '</select></div></form>';
+
+
+	// TEAM
+	$filter_output .= '<form class="uds-form" role="search" aria-label="Filter by team">';
+	$filter_output .= '<div class="form-group">';
+	$filter_output .= '<label for="filter-team">Team Name</label>';
+	$filter_output .= '<select id="filter-team" class="filter form-select" data-filter-group="team">';
+	$filter_output .= '<option value=""> — select a team — </option>';
+
+	foreach ($team_index as $slug => $name) {
+		$filter_output .= '<option value=".team-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
+	}
+
+	$filter_output .= '</select></div></form>';
+
+
+	// SEARCH
+	$filter_output .= '<form class="uds-form" role="search" aria-label="Search projects">';
+	$filter_output .= '<div class="form-group">';
+	$filter_output .= '<label for="filter-search">Search</label>';
+	$filter_output .= '<input type="text" id="filter-search" class="filter form-control" placeholder="' . esc_attr($search_placeholder) . '" />';
+	$filter_output .= '</div></form>';
+
+
+	// RESET BUTTON (this is on the real page)
+	$filter_output .= '<button id="filter-reset" class="btn btn-dark btn-sm" type="reset">Reset</button>';
+
+	$filter_output .= '</div>';
 
 }
 
 /**
  * Output the block
  */
+$output = '<div class="isotope-layout">';
+$output .= $filter_output;
+$output .= '<div class="isotope-results">';
+$output .= $cards_output;
+$output .= '</div>';
+
 echo $blockwrap . $output . '</div>';
 ?>
