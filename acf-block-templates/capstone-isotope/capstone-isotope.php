@@ -94,11 +94,9 @@ if (!empty($tax_query) && count($tax_query) > 1) {
 }
 
 // Collections for filter selects
-$program_index = array();
 $program_date_index = array();
 $sponsor_index = array();
 $research_tag_index = array();
-$team_index = array();
 $title_index = array(); // For search, but actually we'll use data attributes
 
 $the_query = new WP_Query($args);
@@ -120,9 +118,6 @@ if ($the_query->have_posts()) {
             foreach ($program_terms as $term) {
                 $slug = sanitize_html_class($term->slug);
                 $post_class_list[] = 'program-' . $slug;
-                if (!isset($program_index[$term->slug])) {
-                    $program_index[$term->slug] = $term->name;
-                }
             }
         }
 
@@ -167,9 +162,6 @@ if ($the_query->have_posts()) {
         if (!empty($team_name)) {
             $team_slug = sanitize_html_class($team_name);
             $post_class_list[] = 'team-' . $team_slug;
-            if (!isset($team_index[$team_slug])) {
-                $team_index[$team_slug] = $team_name;
-            }
         }
 
         $class_attr = implode(' ', array_unique(array_map('sanitize_html_class', $post_class_list)));
@@ -202,13 +194,13 @@ if ($the_query->have_posts()) {
 		$card_output .= '<div class="card-meta-wrapper">';
 		$card_output .= '<dl class="card-meta">';
 
-		// PROGRAM
-		if (!empty($program_terms) && !is_wp_error($program_terms)) {
-			$program_names = wp_list_pluck($program_terms, 'name');
-			$card_output .= '<dt>Program</dt><dd>' . esc_html(implode(', ', $program_names)) . '</dd>';
+		// PROGRAM DATE
+		if (!empty($program_date_terms) && !is_wp_error($program_date_terms)) {
+			$date_names = wp_list_pluck($program_date_terms, 'name');
+			$card_output .= '<dt>Program Date</dt><dd>' . esc_html(implode(', ', $date_names)) . '</dd>';
 		}
 
-		// TEAM
+		// TEAM (for display + search)
 		if (!empty($team_name)) {
 			$card_output .= '<dt>Team</dt><dd>' . esc_html($team_name) . '</dd>';
 		}
@@ -248,21 +240,6 @@ if ($the_query->have_posts()) {
 
 	$filter_output .= '</select></div></form>';
 
-
-	// PROGRAM
-	$filter_output .= '<form class="uds-form" role="search" aria-label="Filter by program">';
-	$filter_output .= '<div class="form-group">';
-	$filter_output .= '<label for="filter-program">Program</label>';
-	$filter_output .= '<select id="filter-program" class="filter form-select" data-filter-group="program">';
-	$filter_output .= '<option value=""> — select a program — </option>';
-
-	foreach ($program_index as $slug => $name) {
-		$filter_output .= '<option value=".program-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
-	}
-
-	$filter_output .= '</select></div></form>';
-
-
 	// SPONSOR
 	$filter_output .= '<form class="uds-form" role="search" aria-label="Filter by sponsor">';
 	$filter_output .= '<div class="form-group">';
@@ -286,20 +263,6 @@ if ($the_query->have_posts()) {
 
 	foreach ($research_tag_index as $slug => $name) {
 		$filter_output .= '<option value=".research_tag-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
-	}
-
-	$filter_output .= '</select></div></form>';
-
-
-	// TEAM
-	$filter_output .= '<form class="uds-form" role="search" aria-label="Filter by team">';
-	$filter_output .= '<div class="form-group">';
-	$filter_output .= '<label for="filter-team">Team Name</label>';
-	$filter_output .= '<select id="filter-team" class="filter form-select" data-filter-group="team">';
-	$filter_output .= '<option value=""> — select a team — </option>';
-
-	foreach ($team_index as $slug => $name) {
-		$filter_output .= '<option value=".team-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
 	}
 
 	$filter_output .= '</select></div></form>';
