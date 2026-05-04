@@ -305,7 +305,6 @@ if ($the_query->have_posts()) {
 	$filter_output .= '</div>'; // end top row
 
 
-
 	// -------------------------
 	// SECOND ROW (COUNT)
 	// -------------------------
