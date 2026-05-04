@@ -72,6 +72,28 @@ function initIsotopeBlocks() {
     updateCount();
 
     // -------------------------
+    // FOCUS HELPERS
+    // -------------------------
+    function focusVisibleControl() {
+      window.setTimeout(() => {
+        if (!controlSearch.classList.contains('d-none') && searchInput) {
+          searchInput.focus();
+          return;
+        }
+        if (!controlFilters.classList.contains('d-none')) {
+          const firstEnabledSelect = controlFilters.querySelector('.filter.form-select:not([disabled])');
+          if (firstEnabledSelect) {
+            firstEnabledSelect.focus();
+            return;
+          }
+        }
+        if (toggleBtn) {
+          toggleBtn.focus();
+        }
+      }, 0);
+    }
+
+    // -------------------------
     // TOGGLE BUTTON (Search <-> Filters)
     // -------------------------
     if (toggleBtn) {
@@ -99,6 +121,7 @@ function initIsotopeBlocks() {
         iso.arrange({
           filter: '*'
         });
+        focusVisibleControl();
       });
     }
 
@@ -159,6 +182,7 @@ function initIsotopeBlocks() {
         iso.arrange({
           filter: '*'
         });
+        searchInput.focus();
       });
     }
 
@@ -175,6 +199,12 @@ function initIsotopeBlocks() {
         iso.arrange({
           filter: '*'
         });
+        if (!controlFilters.classList.contains('d-none')) {
+          const firstEnabledSelect = controlFilters.querySelector('.filter.form-select:not([disabled])');
+          if (firstEnabledSelect) {
+            firstEnabledSelect.focus();
+          }
+        }
       });
     }
   });
