@@ -1,0 +1,143 @@
+{
+    "key": "group_capstone_isotope",
+    "title": "Capstone Isotope Block",
+    "fields": [
+        {
+            "key": "field_program_selector",
+            "label": "Programs",
+            "name": "capstone_isotope_programs",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Select programs to filter the query. Leave empty to show all.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "program",
+            "field_type": "multi_select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_program_date_selector",
+            "label": "Program Dates",
+            "name": "capstone_isotope_program_dates",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Select program dates to filter the query. Leave empty to show all.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "program_date",
+            "field_type": "multi_select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_research_tag_selector",
+            "label": "Research Tags",
+            "name": "capstone_isotope_research_tags",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Select research tags to filter the query. Leave empty to show all.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "research_tag",
+            "field_type": "multi_select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_query_size",
+            "label": "Query Size",
+            "name": "capstone_isotope_query_size",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Number of projects to display (default: 50, max 500).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 50,
+            "min": 1,
+            "max": 500,
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "step": 1,
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_search_placeholder",
+            "label": "Search Placeholder",
+            "name": "capstone_isotope_search_placeholder",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Placeholder text for the search input (optional).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Search projects...",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/capstone-isotope"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Fields for the Capstone Isotope block to control query filters and display settings.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1777934241
+}
