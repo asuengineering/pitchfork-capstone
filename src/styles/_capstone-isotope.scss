@@ -35,6 +35,10 @@ Capstone, isotope block
 		flex: 1;
 	}
 
+	.filter-toggle-group {
+		display: none;
+	}
+
 	/* Search controls */
 
 	.control-search {
@@ -59,6 +63,10 @@ Capstone, isotope block
 	.control-search input {
 		flex: 1;
 		min-width: 0;
+	}
+
+	.control-search .clear-search {
+		display: none;
 	}
 
 	/* Filter controls */
@@ -95,7 +103,7 @@ Capstone, isotope block
 
 	.project-card {
 		width: 100%;
-		margin: 0 $uds-size-spacing-2 $uds-size-spacing-4;
+		margin: 0 0 $uds-size-spacing-4 0;
 		position: absolute;
 
 		/* Hide meta on mobile */
@@ -115,10 +123,19 @@ Capstone, isotope block
 
 	@include media-breakpoint-up($md) {
 
+		.filter-toggle-group {
+			display: block;
+		}
+
+		.control-search .clear-search {
+			display: block;
+		}
+
 		/* Two column layout */
 
 		.project-card {
 			width: calc(50% - 2rem);
+			margin: 0 $uds-size-spacing-2 $uds-size-spacing-4;
 
 			.card-title a {
 				text-decoration: underline;
