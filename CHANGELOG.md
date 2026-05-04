@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### Version 1.1
+
+Stable version of the theme.
+
+- ADD: Create block `capstone-isotope` for displpay and filtering of a collection of cards associated with capstone projects.
+- ADD: Created block binding `capstone/team-name` to allow for term display in templates and query loop sorting.
+
 ### Version 1.0
 
 Stable version of the theme.
