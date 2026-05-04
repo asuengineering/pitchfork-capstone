@@ -5,6 +5,7 @@
 
 @import "../src/unity-bootstrap-theme/_custom-asu-variables.scss";
 @import 'media-queries';
+@import 'capstone-isotope';
 
 /*--------------------------------------------------------------
 # Capstone Hero
@@ -244,95 +245,6 @@
 				}
 			}
 
-		}
-	}
-}
-
-.capstone-isotope {
-
-	/* -------------------------
-	   MOBILE (default)
-	------------------------- */
-	.card {
-		height: auto;
-	}
-
-	.col-filters {
-		background-color: $uds-color-base-gray-2;
-		padding: $uds-size-spacing-4;
-		margin-bottom: $uds-size-spacing-4;
-	}
-
-	.isotope-results {
-		position: relative;
-	}
-
-	.project-card {
-		width: 100%;
-		margin-bottom: $uds-size-spacing-4;
-		margin-right: $uds-size-spacing-4;
-		position: absolute;
-
-		/* 🔥 HIDE META ON MOBILE */
-		.card-meta-wrapper {
-			display: none;
-		}
-	}
-
-
-	/* -------------------------
-	   DESKTOP
-	------------------------- */
-
-	@include media-breakpoint-up($md) {
-
-		.isotope-layout {
-			display: grid;
-			grid-template-columns: 1fr 3fr;
-			gap: 2rem;
-		}
-
-		.col-filters {
-			background-color: transparent;
-			padding: 0;
-			margin-bottom: 0;
-		}
-
-		.project-card {
-			width: calc(50% - 2rem);
-
-			/* ❌ remove fixed height issues */
-			height: auto;
-			min-height: 0;
-		}
-
-		/* 🔥 SHOW META AGAIN */
-		.project-card .card-meta-wrapper {
-			display: block;
-			padding: $uds-size-spacing-4;
-			background: $uds-color-base-gray-1;
-			border-top: 1px solid $uds-color-base-gray-3;
-		}
-
-		.project-card .card-meta {
-			display: grid;
-			grid-template-columns: auto 1fr;
-			row-gap: $uds-size-spacing-1;
-			column-gap: $uds-size-spacing-2;
-
-			dt {
-				font-weight: 700;
-				font-size: 0.875rem;
-
-				&::after {
-					content: ":";
-				}
-			}
-
-			dd {
-				margin: 0;
-				font-size: 0.875rem;
-			}
 		}
 	}
 }

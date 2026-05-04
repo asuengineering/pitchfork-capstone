@@ -224,73 +224,109 @@ if ($the_query->have_posts()) {
 		$cards_output .= $card_output;
 	}
 
-	// Build filters (MATCHING NEWS SITE STRUCTURE)
-	$filter_output = '<div class="col-filters">';
+	// Filter Output
+	$filter_output = '<div class="filter-bar">';
+
+	// -------------------------
+	// TOP ROW
+	// -------------------------
+	$filter_output .= '<div class="filter-bar-top">';
+
+	// LEFT SIDE (75%)
+	$filter_output .= '<div class="filter-controls">';
+
+	/* =========================
+	SEARCH CONTROLS (default)
+	========================= */
+	$filter_output .= '<div class="control-set control-search">';
+;
+	$filter_output .= '<form id="search" class="uds-form">';
+	$filter_output .= '<div class="form-group">';
+	$filter_output .= '<label for="filter-search">Search projects</label>';
+	$filter_output .= '<div class="search-input-row">';
+	$filter_output .= '<input type="text" id="filter-search" class="filter form-control" placeholder="' . esc_attr($search_placeholder) . '" />';
+	$filter_output .= '<button type="button" class="btn btn-maroon clear-search">Clear</button>';
+	$filter_output .= '</div></div></form>';
+
+	$filter_output .= '</div>';
+
+	/* =========================
+	FILTER CONTROLS (hidden)
+	========================= */
+	$filter_output .= '<div class="control-set control-filters d-none">';
 
 	// PROGRAM DATE
-	$filter_output .= '<form class="uds-form" role="search" aria-label="Filter by program date">';
+	$filter_output .= '<form id="program-date" class="uds-form">';
 	$filter_output .= '<div class="form-group">';
 	$filter_output .= '<label for="filter-program-date">Program Date</label>';
 	$filter_output .= '<select id="filter-program-date" class="filter form-select" data-filter-group="program_date">';
-	$filter_output .= '<option value=""> — select a program date — </option>';
-
+	$filter_output .= '<option value="">-- select an option --</option>';
 	foreach ($program_date_index as $slug => $name) {
 		$filter_output .= '<option value=".program_date-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
 	}
-
 	$filter_output .= '</select></div></form>';
 
 	// SPONSOR
-	$filter_output .= '<form class="uds-form" role="search" aria-label="Filter by sponsor">';
+	$filter_output .= '<form id="sponsor" class="uds-form">';
 	$filter_output .= '<div class="form-group">';
 	$filter_output .= '<label for="filter-sponsor">Sponsor</label>';
 	$filter_output .= '<select id="filter-sponsor" class="filter form-select" data-filter-group="sponsor">';
-	$filter_output .= '<option value=""> — select a sponsor — </option>';
-
+	$filter_output .= '<option value="">-- select an option --</option>';
 	foreach ($sponsor_index as $slug => $name) {
 		$filter_output .= '<option value=".sponsor-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
 	}
-
 	$filter_output .= '</select></div></form>';
 
-
 	// RESEARCH TAG
-	$filter_output .= '<form class="uds-form" role="search" aria-label="Filter by research tag">';
+	$filter_output .= '<form id="research-tag" class="uds-form">';
 	$filter_output .= '<div class="form-group">';
 	$filter_output .= '<label for="filter-research-tag">Research Tag</label>';
 	$filter_output .= '<select id="filter-research-tag" class="filter form-select" data-filter-group="research_tag">';
-	$filter_output .= '<option value=""> — select a research tag — </option>';
-
+	$filter_output .= '<option value="">-- select an option --</option>';
 	foreach ($research_tag_index as $slug => $name) {
 		$filter_output .= '<option value=".research_tag-' . esc_attr($slug) . '">' . esc_html($name) . '</option>';
 	}
-
 	$filter_output .= '</select></div></form>';
 
+	// RESET BUTTON
+	$filter_output .= '<button type="button" class="btn btn-maroon reset-filters">Reset</button>';
 
-	// SEARCH
-	$filter_output .= '<form class="uds-form" role="search" aria-label="Search projects">';
-	$filter_output .= '<div class="form-group">';
-	$filter_output .= '<label for="filter-search">Search</label>';
-	$filter_output .= '<input type="text" id="filter-search" class="filter form-control" placeholder="' . esc_attr($search_placeholder) . '" />';
-	$filter_output .= '</div></form>';
+	$filter_output .= '</div>'; // control-filters
+
+	$filter_output .= '</div>'; // filter-controls
 
 
-	// RESET BUTTON (this is on the real page)
-	$filter_output .= '<button id="filter-reset" class="btn btn-dark btn-sm" type="reset">Reset</button>';
 
+	// RIGHT SIDE, Toggle button.
+	$filter_output .= '<div class="filter-toggle-group">';
+	$filter_output .= '<button type="button" class="btn btn-dark toggle-filters">Show filters</button>';
+	$filter_output .= '</div>'; // toggle group
+
+	$filter_output .= '</div>'; // end top row
+
+
+
+	// -------------------------
+	// SECOND ROW (COUNT)
+	// -------------------------
+	$filter_output .= '<div class="filter-count">';
+	$filter_output .= 'Now displaying <span class="count-visible">0</span> of <span class="count-total">0</span> projects.';
 	$filter_output .= '</div>';
+
+	$filter_output .= '</div>'; // end filter bar
 
 }
 
 /**
  * Output the block
  */
-$output = '<div class="isotope-layout">';
+$output = '<div class="capstone-inner">';
 $output .= $filter_output;
 $output .= '<div class="isotope-results">';
 $output .= $cards_output;
 $output .= '</div>';
+$output .= '</div>';
 
 echo $blockwrap . $output . '</div>';
+
 ?>

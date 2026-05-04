@@ -1,0 +1,223 @@
+/*--------------------------------------------------------------
+# Capstone isotope block
+- Contains styles for blocks, templates and other assets.
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+Capstone, isotope block
+- mobile (first)
+--------------------------------------------------------------*/
+
+.capstone-isotope {
+
+	.card {
+		height: auto;
+	}
+
+	/*--------------------------------------------------------------
+	Filter bar
+	--------------------------------------------------------------*/
+
+	.filter-bar {
+		padding: $uds-size-spacing-4;
+		background-color: $uds-color-base-gray-2;
+		margin-bottom: $uds-size-spacing-4;
+	}
+
+	.filter-bar-top {
+		display: flex;
+		gap: $uds-size-spacing-2;
+		align-items: flex-end;
+		justify-content: space-between;
+	}
+
+	.filter-controls {
+		flex: 1;
+	}
+
+	/* Search controls */
+
+	.control-search {
+
+		.search-input-row {
+			display: flex;
+			gap: $uds-size-spacing-2;
+			align-items: stretch;
+		}
+
+		.search-input-row input {
+			flex: 1;
+			min-width: 0;
+		}
+	}
+
+	.control-search .form-group {
+		width: 100%;
+		margin-bottom: 0;
+	}
+
+	.control-search input {
+		flex: 1;
+		min-width: 0;
+	}
+
+	/* Filter controls */
+
+	.control-filters {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+		gap: $uds-size-spacing-3;
+		align-items: end;
+
+		.form-group {
+			margin-bottom: 0;
+		}
+	}
+
+	.control-filters .reset-filters {
+		grid-column: -1;
+		justify-self: end;
+	}
+
+	/* Count display */
+
+	.filter-count {
+		margin-top: $uds-size-spacing-2;
+	}
+
+	/*--------------------------------------------------------------
+	Isotope grid
+	--------------------------------------------------------------*/
+
+	.isotope-results {
+		position: relative;
+	}
+
+	.project-card {
+		width: 100%;
+		margin: 0 $uds-size-spacing-2 $uds-size-spacing-4;
+		position: absolute;
+
+		/* Hide meta on mobile */
+		.card-meta-wrapper {
+			display: none;
+		}
+	}
+}
+
+
+/*--------------------------------------------------------------
+Capstone, isotope block
+- tablet and desktop overrides
+--------------------------------------------------------------*/
+
+.capstone-isotope {
+
+	@include media-breakpoint-up($md) {
+
+		/* Two column layout */
+
+		.project-card {
+			width: calc(50% - 2rem);
+
+			.card-title a {
+				text-decoration: underline;
+			}
+		}
+
+		/* Show card meta */
+
+		.project-card .card-meta-wrapper {
+			display: block;
+			padding: $uds-size-spacing-3 $uds-size-spacing-4;
+			background: $uds-color-base-gray-1;
+			border-top: 1px solid $uds-color-base-gray-3;
+		}
+
+		.project-card .card-meta {
+			display: grid;
+			grid-template-columns: auto 1fr;
+			row-gap: $uds-size-spacing-1;
+			column-gap: $uds-size-spacing-2;
+			margin-bottom: 0;
+
+			dt {
+				font-weight: 700;
+				font-size: 0.875rem;
+
+				&::after {
+					content: ":";
+				}
+			}
+
+			dd {
+				margin: 0;
+				font-size: 0.875rem;
+			}
+		}
+	}
+}
+
+
+/*--------------------------------------------------------------
+Capstone, isotope block
+- large desktop overrides
+--------------------------------------------------------------*/
+
+.capstone-isotope {
+
+	@include media-breakpoint-up($lg) {
+
+		/* Three column layout */
+
+		.project-card {
+			width: calc(33.333% - 2rem);
+		}
+	}
+}
+
+
+/*--------------------------------------------------------------
+# Capstone isotope block (editor only)
+--------------------------------------------------------------*/
+
+.block-editor-block-list__layout {
+
+	.capstone-isotope {
+
+		background-color: aliceblue; // optional visual cue
+
+		.isotope-results {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.project-card {
+			position: relative !important; // 🔥 override isotope
+			width: 100% !important;
+			left: auto !important;
+			top: auto !important;
+		}
+
+		/* tablet */
+		@media (min-width: 768px) {
+			.isotope-results {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+
+		/* desktop */
+		@media (min-width: 1024px) {
+			.isotope-results {
+				grid-template-columns: 1fr 1fr 1fr;
+			}
+		}
+
+		/* disable interactions in editor */
+		a {
+			pointer-events: none;
+			cursor: default;
+		}
+	}
+}
